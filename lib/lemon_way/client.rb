@@ -83,6 +83,7 @@ module LemonWay
     def query(method, attrs={})
       http          = Net::HTTP.new(@uri.host, @uri.port)
       http.use_ssl  = true if @uri.port == 443
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       req           = Net::HTTP::Post.new(@uri.request_uri)
       req.body      = make_body(method, attrs)
